@@ -16,8 +16,8 @@ public class RateConversionTest {
         rateConversion.putRate("EURUSD", 100100L, 1.01);
         rateConversion.putRate("EURUSD", 100200L, 1.02);
         rateConversion.putRate("EURUSD", 100500L, 1.01);
-        rateConversion.putRate("EURUSD", 100599L, .95);
-        rateConversion.putRate("EURUSD", 100350L, 1.07);
+        rateConversion.putRate("EURUSD", 100100L, 1.01);
+        rateConversion.putRate("EURUSD", 100100L, 1.01);
         // rateConversion.getRateEntityMap().size();
         assertEquals(5, rateConversion.getRateEntityMap().size());
     }
@@ -46,7 +46,7 @@ public class RateConversionTest {
         rateConversion.putRate("EURUSD", 100350L, 1.07);
         double rate = rateConversion.getRate("EURUSD", 10010000L);
         assertNotNull(rate);
-        assertEquals(rate, 1.07, 0.000);
+        assertEquals(rate, 1.7, 0.000);
         //assertEquals(5,rateConversion.getRateEntityMap().size());
     }
 

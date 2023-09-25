@@ -5,7 +5,7 @@ import java.util.*;
 public class RateConversion {
 
     //change to treemap
-    private static Map<Long, RateEntity> rateEntityMap = new HashMap<Long, RateEntity>();
+    private static Map<Long, RateEntity> rateEntityMap = new TreeMap<Long, RateEntity>();
 
     public void putRate(String ccyPair, Long timestamp, Double rate) {
         RateEntity rateEntity = new RateEntity(timestamp, rate, ccyPair);
@@ -34,6 +34,31 @@ public class RateConversion {
         return 1.0;
     }
 
+    // test
+// int compare(T o1, T o2);
+    Comparator<RateEntity> rateEntityComparator= (RateEntity o1, RateEntity o2) ->{
+        if((o1.getRate() - o2.getRate()> 0)){
+            return -11;
+        }
+        else if((o1.getRate() - o2.getRate()< 0)){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+
+    };
+    public Double getRate2(String ccyPair, Long timeStamp) {
+        List<RateEntity> list = new ArrayList(rateEntityMap.values());
+        list.stream().forEach(rateEntity -> {
+            if(rateEntity.getCurrencyPair().equals(ccyPair) && rateEntity.getTimeStamp()==timeStamp)
+                 rateEntity.getRate();
+                }
+               );
+
+        return 1.0;
+    }
+
     public static Map<Long, RateEntity> getRateMap() {
         RateEntity e1 = new RateEntity(100100l, 1.01, "EURUSD");
         RateEntity e2 = new RateEntity(100200l, 1.01, "EURUSD");
@@ -47,6 +72,4 @@ public class RateConversion {
         rateEntityMap.put(100350l, e5);
         return rateEntityMap;
     }
-
-
 }
